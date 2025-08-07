@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(210, 25%, 7.8431%);
+  --card: hsl(180, 6.6667%, 97.0588%);
+  --card-foreground: hsl(210, 25%, 7.8431%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(210, 25%, 7.8431%);
+  --primary: hsl(213, 94%, 68%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(210, 25%, 7.8431%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(220, 14%, 96%);
+  --muted-foreground: hsl(220, 8.9%, 46.1%);
+  --accent: hsl(220, 14%, 96%);
+  --accent-foreground: hsl(220, 8.9%, 46.1%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(220, 13%, 91%);
+  --input: hsl(220, 13%, 91%);
+  --ring: hsl(213, 94%, 68%);
+  --chart-1: hsl(213, 94%, 68%);
+  --chart-2: hsl(173, 58%, 39%);
+  --chart-3: hsl(197, 37%, 24%);
+  --chart-4: hsl(43, 74%, 66%);
+  --chart-5: hsl(27, 87%, 67%);
+  --sidebar: hsl(0, 0%, 100%);
+  --sidebar-foreground: hsl(224, 71%, 4%);
+  --sidebar-primary: hsl(224, 76%, 50%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(220, 14%, 96%);
+  --sidebar-accent-foreground: hsl(220, 8.9%, 46.1%);
+  --sidebar-border: hsl(220, 13%, 91%);
+  --sidebar-ring: hsl(217, 91%, 60%);
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: 'Courier New', monospace;
+  --radius: 0.75rem;
+  
+  /* Custom colors for the business website */
+  --hero-gradient-from: hsl(213, 94%, 68%);
+  --hero-gradient-to: hsl(213, 84%, 58%);
+  --success-color: hsl(158, 64%, 52%);
+  --success-hover: hsl(158, 64%, 42%);
+}
+
+.dark {
+  --background: hsl(224, 71%, 4%);
+  --foreground: hsl(213, 31%, 91%);
+  --card: hsl(224, 71%, 4%);
+  --card-foreground: hsl(213, 31%, 91%);
+  --popover: hsl(224, 71%, 4%);
+  --popover-foreground: hsl(213, 31%, 91%);
+  --primary: hsl(213, 94%, 68%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(215, 27%, 17%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(223, 47%, 11%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --accent: hsl(216, 34%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 63%, 31%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(216, 34%, 17%);
+  --input: hsl(216, 34%, 17%);
+  --ring: hsl(213, 94%, 68%);
+  --chart-1: hsl(213, 94%, 68%);
+  --chart-2: hsl(173, 58%, 39%);
+  --chart-3: hsl(197, 37%, 24%);
+  --chart-4: hsl(43, 74%, 66%);
+  --chart-5: hsl(27, 87%, 67%);
+  --sidebar: hsl(224, 71%, 4%);
+  --sidebar-foreground: hsl(213, 31%, 91%);
+  --sidebar-primary: hsl(213, 94%, 68%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(216, 34%, 17%);
+  --sidebar-accent-foreground: hsl(210, 40%, 98%);
+  --sidebar-border: hsl(216, 34%, 17%);
+  --sidebar-ring: hsl(213, 94%, 68%);
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: 'Courier New', monospace;
+  --radius: 0.75rem;
+  
+  /* Custom colors for the business website */
+  --hero-gradient-from: hsl(213, 94%, 68%);
+  --hero-gradient-to: hsl(213, 84%, 58%);
+  --success-color: hsl(158, 64%, 52%);
+  --success-hover: hsl(158, 64%, 42%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-from)), hsl(var(--hero-gradient-to)));
+  }
+  
+  .success-button {
+    background-color: hsl(var(--success-color));
+  }
+  
+  .success-button:hover {
+    background-color: hsl(var(--success-hover));
+  }
+}
