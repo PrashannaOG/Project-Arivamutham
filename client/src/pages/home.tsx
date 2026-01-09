@@ -51,18 +51,18 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav 
+    <nav 
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled 
-            ? "bg-background/95 backdrop-blur-md shadow-md" 
-            : "bg-background/80 backdrop-blur-sm"
+            ? "bg-[#005a9c] shadow-md" 
+            : "bg-[#005a9c]/90 backdrop-blur-sm"
         }`}
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
             <button 
               onClick={() => scrollToSection("home")} 
-              className="text-2xl font-bold text-primary hover:text-primary/80 transition-colors"
+              className="text-2xl font-bold text-white hover:text-white/80 transition-colors"
               data-testid="logo-button"
             >
               Arivamudham
@@ -72,42 +72,42 @@ export default function Home() {
             <div className="hidden md:flex items-center space-x-8">
               <button 
                 onClick={() => scrollToSection("home")} 
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-home"
               >
                 Home
               </button>
               <button 
                 onClick={() => scrollToSection("about")} 
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-about"
               >
                 About
               </button>
               <button 
                 onClick={() => scrollToSection("services")} 
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-services"
               >
                 Services
               </button>
               <button 
                 onClick={() => scrollToSection("testimonials")} 
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-testimonials"
               >
                 Testimonials
               </button>
               <button 
                 onClick={() => scrollToSection("contact")} 
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-contact"
               >
                 Contact
               </button>
               <Button 
                 onClick={() => scrollToSection("contact")} 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2 rounded-full"
+                className="bg-white text-[#005a9c] hover:bg-white/90 px-6 py-2 rounded-full font-semibold"
                 data-testid="cta-book-session"
               >
                 Book Session
@@ -116,7 +116,7 @@ export default function Home() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2"
+              className="md:hidden p-2 text-white"
               onClick={toggleMenu}
               data-testid="mobile-menu-toggle"
             >
@@ -126,39 +126,39 @@ export default function Home() {
 
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="md:hidden bg-background border-t border-border py-4">
+            <div className="md:hidden bg-[#005a9c] border-t border-white/10 py-4">
               <div className="flex flex-col space-y-4">
                 <button 
                   onClick={() => scrollToSection("home")} 
-                  className="text-left px-4 py-2 text-foreground hover:text-primary transition-colors"
+                  className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-home"
                 >
                   Home
                 </button>
                 <button 
                   onClick={() => scrollToSection("about")} 
-                  className="text-left px-4 py-2 text-foreground hover:text-primary transition-colors"
+                  className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-about"
                 >
                   About
                 </button>
                 <button 
                   onClick={() => scrollToSection("services")} 
-                  className="text-left px-4 py-2 text-foreground hover:text-primary transition-colors"
+                  className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-services"
                 >
                   Services
                 </button>
                 <button 
                   onClick={() => scrollToSection("testimonials")} 
-                  className="text-left px-4 py-2 text-foreground hover:text-primary transition-colors"
+                  className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-testimonials"
                 >
                   Testimonials
                 </button>
                 <button 
                   onClick={() => scrollToSection("contact")} 
-                  className="text-left px-4 py-2 text-foreground hover:text-primary transition-colors"
+                  className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-contact"
                 >
                   Contact
