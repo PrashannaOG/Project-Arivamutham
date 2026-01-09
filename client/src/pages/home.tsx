@@ -49,13 +49,13 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black">
       {/* Navigation */}
     <nav 
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled 
-            ? "bg-[#005a9c] shadow-md" 
-            : "bg-[#005a9c]/90 backdrop-blur-sm"
+            ? "bg-[#005a9c] shadow-md shadow-blue-900/20" 
+            : "bg-black/80 backdrop-blur-md border-b border-blue-900/20"
         }`}
       >
         <div className="container mx-auto px-4">
@@ -170,11 +170,11 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
         <div 
-          className="absolute inset-0 hero-gradient opacity-90"
+          className="absolute inset-0 opacity-40"
           style={{
-            backgroundImage: `linear-gradient(135deg, hsl(213, 94%, 68%), hsl(213, 84%, 58%)), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')`,
+            backgroundImage: `linear-gradient(135deg, #000000 0%, #005a9c 100%), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -184,12 +184,12 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight" data-testid="hero-title">
               Turn Your 20s into Crores! Earn ₹1 Lakh/Month!
             </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-95" data-testid="hero-subtitle">
+            <p className="text-xl md:text-2xl mb-8 opacity-95 text-blue-100" data-testid="hero-subtitle">
               Build a high-income LIC career with low investment. Proven system, full mentorship, unlimited earnings!
             </p>
             <Button 
               onClick={() => scrollToSection("contact")} 
-              className="success-button hover:success-button text-white px-8 py-4 text-lg rounded-full font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg"
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg rounded-full font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/20"
               data-testid="hero-cta"
             >
               Book Your Free Session!
@@ -199,28 +199,28 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-muted/30">
+      <section id="about" className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4" data-testid="about-title">
+            <h2 className="text-4xl font-bold mb-4 text-white" data-testid="about-title">
               Financial Growth with Arivamudham
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto" data-testid="about-subtitle">
+            <p className="text-lg text-blue-200/60 max-w-3xl mx-auto" data-testid="about-subtitle">
               Empowering young entrepreneurs to achieve financial freedom through proven LIC career development
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h3 className="text-2xl font-semibold mb-4" data-testid="about-mission-title">
+              <h3 className="text-2xl font-semibold mb-4 text-primary" data-testid="about-mission-title">
                 Our Mission
               </h3>
-              <p className="text-lg leading-relaxed text-muted-foreground" data-testid="about-description-1">
+              <p className="text-lg leading-relaxed text-blue-100/70" data-testid="about-description-1">
                 I am Amutha K, a Development Officer at LIC India and the proud founder of Arivamudham - AM's Team. 
                 With over 15 years of experience in the industry, I have had the privilege of training 117 individuals, 
                 creating 23+ success stories, and earning 30+ awards.
               </p>
-              <p className="text-lg leading-relaxed text-muted-foreground" data-testid="about-description-2">
+              <p className="text-lg leading-relaxed text-blue-100/70" data-testid="about-description-2">
                 At Arivamudham - AM's Team, we are dedicated to your success. Our team provides proven training, 
                 mentoring, and support to ensure you reach your goals. Together, we have helped countless individuals 
                 earn ₹1 lakh/month and beyond.
@@ -228,22 +228,22 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+              <Card className="text-center p-6 border-blue-900/50 bg-blue-950/10 hover:bg-blue-950/20 transition-all">
                 <CardContent className="p-0">
                   <div className="text-3xl font-bold text-primary mb-2" data-testid="stat-trained">117+</div>
-                  <div className="text-sm text-muted-foreground" data-testid="stat-trained-label">Individuals Trained</div>
+                  <div className="text-sm text-blue-300/60" data-testid="stat-trained-label">Individuals Trained</div>
                 </CardContent>
               </Card>
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+              <Card className="text-center p-6 border-blue-900/50 bg-blue-950/10 hover:bg-blue-950/20 transition-all">
                 <CardContent className="p-0">
                   <div className="text-3xl font-bold text-primary mb-2" data-testid="stat-success">23+</div>
-                  <div className="text-sm text-muted-foreground" data-testid="stat-success-label">Success Stories</div>
+                  <div className="text-sm text-blue-300/60" data-testid="stat-success-label">Success Stories</div>
                 </CardContent>
               </Card>
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+              <Card className="text-center p-6 border-blue-900/50 bg-blue-950/10 hover:bg-blue-950/20 transition-all">
                 <CardContent className="p-0">
                   <div className="text-3xl font-bold text-primary mb-2" data-testid="stat-awards">30+</div>
-                  <div className="text-sm text-muted-foreground" data-testid="stat-awards-label">Awards Earned</div>
+                  <div className="text-sm text-blue-300/60" data-testid="stat-awards-label">Awards Earned</div>
                 </CardContent>
               </Card>
             </div>
@@ -252,72 +252,72 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20">
+      <section id="services" className="py-20 bg-[#020617]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4" data-testid="services-title">
+            <h2 className="text-4xl font-bold mb-4 text-white" data-testid="services-title">
               Our Success Path
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto" data-testid="services-subtitle">
+            <p className="text-lg text-blue-200/60 max-w-3xl mx-auto" data-testid="services-subtitle">
               Comprehensive training and mentorship designed to transform your career and financial future
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
+            <Card className="p-6 text-center border-blue-900/30 bg-black/40 hover:border-primary/50 hover:bg-blue-950/10 transition-all duration-300 hover:-translate-y-2">
               <CardContent className="p-0">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Target className="h-10 w-10 text-white" />
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Target className="h-10 w-10 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4" data-testid="service-mindset-title">
+                <h3 className="text-xl font-semibold mb-4 text-white" data-testid="service-mindset-title">
                   Success Mindset Development
                 </h3>
-                <p className="text-muted-foreground" data-testid="service-mindset-description">
+                <p className="text-blue-100/60" data-testid="service-mindset-description">
                   Success is 80% mindset and 20% skills. We help you develop the right mindset, set clear goals, 
                   and create a roadmap to achieve minimum ₹1 crore income.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
+            <Card className="p-6 text-center border-blue-900/30 bg-black/40 hover:border-primary/50 hover:bg-blue-950/10 transition-all duration-300 hover:-translate-y-2">
               <CardContent className="p-0">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <DollarSign className="h-10 w-10 text-white" />
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <DollarSign className="h-10 w-10 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4" data-testid="service-income-title">
+                <h3 className="text-xl font-semibold mb-4 text-white" data-testid="service-income-title">
                   Unlimited Income Potential
                 </h3>
-                <p className="text-muted-foreground" data-testid="service-income-description">
+                <p className="text-blue-100/60" data-testid="service-income-description">
                   No boss, no 9-to-5 job constraints. Enjoy flexible working hours, financial security 
                   with minimum capital investment, and lifetime royalty income.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
+            <Card className="p-6 text-center border-blue-900/30 bg-black/40 hover:border-primary/50 hover:bg-blue-950/10 transition-all duration-300 hover:-translate-y-2">
               <CardContent className="p-0">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <TrendingUp className="h-10 w-10 text-white" />
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <TrendingUp className="h-10 w-10 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4" data-testid="service-growth-title">
+                <h3 className="text-xl font-semibold mb-4 text-white" data-testid="service-growth-title">
                   Proven Growth Strategy
                 </h3>
-                <p className="text-muted-foreground" data-testid="service-growth-description">
+                <p className="text-blue-100/60" data-testid="service-growth-description">
                   Earn ₹1 lakh per month within 3 years and scale to ₹1 crore per year. Our step-by-step 
                   roadmap ensures sustainable growth and success.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
+            <Card className="p-6 text-center border-blue-900/30 bg-black/40 hover:border-primary/50 hover:bg-blue-950/10 transition-all duration-300 hover:-translate-y-2">
               <CardContent className="p-0">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Award className="h-10 w-10 text-white" />
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Award className="h-10 w-10 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4" data-testid="service-mentorship-title">
+                <h3 className="text-xl font-semibold mb-4 text-white" data-testid="service-mentorship-title">
                   Expert Mentorship
                 </h3>
-                <p className="text-muted-foreground" data-testid="service-mentorship-description">
+                <p className="text-blue-100/60" data-testid="service-mentorship-description">
                   Get comprehensive training, recognition & rewards, and learn to impact people's lives 
                   while building your own wealth and entrepreneurial success.
                 </p>
@@ -328,51 +328,51 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-muted/30">
+      <section id="testimonials" className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4" data-testid="testimonials-title">
+            <h2 className="text-4xl font-bold mb-4 text-white" data-testid="testimonials-title">
               What Our Students Are Saying
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto" data-testid="testimonials-subtitle">
+            <p className="text-lg text-blue-200/60 max-w-3xl mx-auto" data-testid="testimonials-subtitle">
               Real stories of transformation and success from our community of entrepreneurs
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Card className="p-8 relative hover:shadow-lg transition-shadow">
+            <Card className="p-8 relative border-blue-900/20 bg-[#020617] hover:shadow-lg hover:shadow-primary/5 transition-all">
               <CardContent className="p-0">
-                <div className="absolute -top-4 -left-4 text-6xl text-primary/20 font-serif">"</div>
-                <blockquote className="text-lg italic mb-6 relative z-10" data-testid="testimonial-1-text">
+                <div className="absolute -top-4 -left-4 text-6xl text-primary/5 font-serif">"</div>
+                <blockquote className="text-lg italic mb-6 relative z-10 text-blue-100/80" data-testid="testimonial-1-text">
                   "I had zero background in insurance sales. The training system here is designed to take beginners 
                   to professionals. Our attitude and willingness to learn matter more than experience."
                 </blockquote>
                 <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-white font-semibold mr-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-semibold mr-4 shadow-lg shadow-primary/20">
                     JI
                   </div>
                   <div>
-                    <div className="font-semibold" data-testid="testimonial-1-name">J. Indra</div>
-                    <div className="text-sm text-muted-foreground" data-testid="testimonial-1-role">LIC Career Advisor</div>
+                    <div className="font-semibold text-white" data-testid="testimonial-1-name">J. Indra</div>
+                    <div className="text-sm text-blue-300/40" data-testid="testimonial-1-role">LIC Career Advisor</div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="p-8 relative hover:shadow-lg transition-shadow">
+            <Card className="p-8 relative border-blue-900/20 bg-[#020617] hover:shadow-lg hover:shadow-primary/5 transition-all">
               <CardContent className="p-0">
-                <div className="absolute -top-4 -left-4 text-6xl text-primary/20 font-serif">"</div>
-                <blockquote className="text-lg italic mb-6 relative z-10" data-testid="testimonial-2-text">
+                <div className="absolute -top-4 -left-4 text-6xl text-primary/5 font-serif">"</div>
+                <blockquote className="text-lg italic mb-6 relative z-10 text-blue-100/80" data-testid="testimonial-2-text">
                   "I was worried about competition until I learned a proper system here. The system puts me in 
                   the top 5% who thrive with strategy. Now my friends ask me for financial advice!"
                 </blockquote>
                 <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-white font-semibold mr-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-semibold mr-4 shadow-lg shadow-primary/20">
                     VS
                   </div>
                   <div>
-                    <div className="font-semibold" data-testid="testimonial-2-name">V. Sankar</div>
-                    <div className="text-sm text-muted-foreground" data-testid="testimonial-2-role">Senior Development Officer</div>
+                    <div className="font-semibold text-white" data-testid="testimonial-2-name">V. Sankar</div>
+                    <div className="text-sm text-blue-300/40" data-testid="testimonial-2-role">Senior Development Officer</div>
                   </div>
                 </div>
               </CardContent>
@@ -382,30 +382,30 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gradient-to-br from-secondary to-secondary/90 text-white">
+      <section id="contact" className="py-20 bg-[#020617] text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-white" data-testid="contact-title">
               Feel Free to Get in Touch
             </h2>
-            <p className="text-lg text-white/80 max-w-3xl mx-auto" data-testid="contact-subtitle">
+            <p className="text-lg text-blue-200/60 max-w-3xl mx-auto" data-testid="contact-subtitle">
               Ready to transform your career? Let's discuss your path to financial freedom
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="space-y-8">
-              <h3 className="text-2xl font-semibold mb-8" data-testid="contact-info-title">Contact Information</h3>
+              <h3 className="text-2xl font-semibold mb-8 text-primary" data-testid="contact-info-title">Contact Information</h3>
               
-              <div className="flex items-center space-x-4 p-4 bg-white/10 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-colors">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+              <div className="flex items-center space-x-4 p-4 bg-black/40 rounded-lg border border-blue-900/10 hover:border-primary/20 transition-colors">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/20">
                   <Phone className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <div className="font-semibold mb-1">Phone:</div>
+                  <div className="font-semibold mb-1 text-white">Phone:</div>
                   <a 
                     href="tel:+919942815544" 
-                    className="text-white/90 hover:text-white transition-colors"
+                    className="text-blue-100/70 hover:text-primary transition-colors"
                     data-testid="contact-phone"
                   >
                     +91 99428 15544
@@ -413,15 +413,15 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-4 p-4 bg-white/10 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-colors">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+              <div className="flex items-center space-x-4 p-4 bg-black/40 rounded-lg border border-blue-900/10 hover:border-primary/20 transition-colors">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/20">
                   <Mail className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <div className="font-semibold mb-1">Email:</div>
+                  <div className="font-semibold mb-1 text-white">Email:</div>
                   <a 
                     href="mailto:amutha.licdocbe@gmail.com" 
-                    className="text-white/90 hover:text-white transition-colors"
+                    className="text-blue-100/70 hover:text-primary transition-colors"
                     data-testid="contact-email"
                   >
                     amutha.licdocbe@gmail.com
@@ -429,13 +429,13 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4 p-4 bg-white/10 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-colors">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mt-1">
+              <div className="flex items-start space-x-4 p-4 bg-black/40 rounded-lg border border-blue-900/10 hover:border-primary/20 transition-colors">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mt-1 shadow-lg shadow-primary/20">
                   <MapPin className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <div className="font-semibold mb-1">Address:</div>
-                  <div className="text-white/90" data-testid="contact-address">
+                  <div className="font-semibold mb-1 text-white">Address:</div>
+                  <div className="text-blue-100/70" data-testid="contact-address">
                     Sri Sairam Complex, Opposite to Ganga Hospital,<br />
                     Mettupalayam Road, Coimbatore – 641043
                   </div>
@@ -443,27 +443,27 @@ export default function Home() {
               </div>
             </div>
 
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+            <Card className="bg-black/40 border-blue-900/10 shadow-xl shadow-primary/5">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-6 text-white" data-testid="contact-form-title">
                   Send us a Message
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <Label htmlFor="name" className="text-white mb-2 block">
+                    <Label htmlFor="name" className="text-blue-100/80 mb-2 block">
                       Full Name
                     </Label>
                     <Input
                       id="name"
                       name="name"
                       required
-                      className="bg-white/90 border-white/20 text-gray-900"
+                      className="bg-black/50 border-blue-900/20 text-white focus:border-primary/50 focus:ring-primary/20 transition-all"
                       data-testid="input-name"
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="email" className="text-white mb-2 block">
+                    <Label htmlFor="email" className="text-blue-100/80 mb-2 block">
                       Email Address
                     </Label>
                     <Input
@@ -471,13 +471,13 @@ export default function Home() {
                       name="email"
                       type="email"
                       required
-                      className="bg-white/90 border-white/20 text-gray-900"
+                      className="bg-black/50 border-blue-900/20 text-white focus:border-primary/50 focus:ring-primary/20 transition-all"
                       data-testid="input-email"
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="phone" className="text-white mb-2 block">
+                    <Label htmlFor="phone" className="text-blue-100/80 mb-2 block">
                       Phone Number
                     </Label>
                     <Input
@@ -485,13 +485,13 @@ export default function Home() {
                       name="phone"
                       type="tel"
                       required
-                      className="bg-white/90 border-white/20 text-gray-900"
+                      className="bg-black/50 border-blue-900/20 text-white focus:border-primary/50 focus:ring-primary/20 transition-all"
                       data-testid="input-phone"
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="message" className="text-white mb-2 block">
+                    <Label htmlFor="message" className="text-blue-100/80 mb-2 block">
                       Message
                     </Label>
                     <Textarea
@@ -499,17 +499,17 @@ export default function Home() {
                       name="message"
                       rows={4}
                       placeholder="Tell us about your career goals..."
-                      className="bg-white/90 border-white/20 text-gray-900 resize-none"
+                      className="bg-black/50 border-blue-900/20 text-white focus:border-primary/50 focus:ring-primary/20 transition-all resize-none"
                       data-testid="input-message"
                     />
                   </div>
 
                   <Button
                     type="submit"
-                    className="success-button hover:success-button text-white w-full py-3 rounded-full font-semibold transition-all duration-300 hover:transform hover:-translate-y-1"
-                    data-testid="button-submit"
+                    className="w-full bg-primary hover:bg-primary/90 text-white py-6 rounded-lg font-bold text-lg shadow-lg shadow-primary/20"
+                    data-testid="submit-button"
                   >
-                    Send Message
+                    Start Your Journey Now!
                   </Button>
                 </form>
               </CardContent>
@@ -519,9 +519,9 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-secondary py-8 text-white">
+      <footer className="bg-black py-8 text-white border-t border-blue-900/20">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-white/80" data-testid="footer-copyright">
+          <p className="text-blue-300/40" data-testid="footer-copyright">
             &copy; <span data-testid="footer-year">{currentYear}</span> Arivamudham Business Solutions. All rights reserved.
           </p>
         </div>
