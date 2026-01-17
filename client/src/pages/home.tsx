@@ -14,8 +14,41 @@ export default function Home() {
   const [currentYear] = useState(new Date().getFullYear());
   const { toast } = useToast();
   const isMobile = useIsMobile();
+  const [content, setContent] = useState<Record<string, any>>({
+    hero: {
+      title: "Turn Your 20s into Crores! Earn ₹1 Lakh/Month!",
+      subtitle: "Build a high-income LIC career with low investment. Proven system, full mentorship, unlimited earnings!"
+    },
+    about: {
+      title: "Financial Growth with Arivamudham",
+      subtitle: "Empowering young entrepreneurs to achieve financial freedom through proven LIC career development"
+    }
+  });
 
   useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const sections = ["hero", "about"];
+        const contents = await Promise.all(
+          sections.map(async (section) => {
+            const res = await fetch(`/api/content/${section}`);
+            if (res.ok) {
+              const data = await res.json();
+              return { [section]: JSON.parse(data.content) };
+            }
+            return null;
+          })
+        );
+
+        const newContent = contents.reduce((acc, curr) => ({ ...acc, ...curr }), {});
+        setContent((prev: Record<string, any>) => ({ ...prev, ...newContent }));
+      } catch (error) {
+        console.error("Failed to fetch content", error);
+      }
+    };
+
+    fetchContent();
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -36,12 +69,46 @@ export default function Home() {
     setIsMenuOpen(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "Thank you for your message. We will contact you soon.",
-    });
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your message. We will contact you soon.",
+        });
+        (e.target as HTMLFormElement).reset();
+      } else {
+        const errorData = await response.json();
+        toast({
+          title: "Submission failed",
+          description: errorData.message || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Could not connect to the server. Please check your internet connection.",
+        variant: "destructive",
+      });
+    }
   };
 
   const toggleMenu = () => {
@@ -51,17 +118,16 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black">
       {/* Navigation */}
-    <nav 
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled 
-            ? "bg-[#005a9c] shadow-md shadow-blue-900/20" 
-            : "bg-black/80 backdrop-blur-md border-b border-blue-900/20"
-        }`}
+      <nav
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+          ? "bg-[#005a9c] shadow-md shadow-blue-900/20"
+          : "bg-black/80 backdrop-blur-md border-b border-blue-900/20"
+          }`}
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
-            <button 
-              onClick={() => scrollToSection("home")} 
+            <button
+              onClick={() => scrollToSection("home")}
               className="text-2xl font-bold text-white hover:text-white/80 transition-colors"
               data-testid="logo-button"
             >
@@ -70,43 +136,43 @@ export default function Home() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <button 
-                onClick={() => scrollToSection("home")} 
+              <button
+                onClick={() => scrollToSection("home")}
                 className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-home"
               >
                 Home
               </button>
-              <button 
-                onClick={() => scrollToSection("about")} 
+              <button
+                onClick={() => scrollToSection("about")}
                 className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-about"
               >
                 About
               </button>
-              <button 
-                onClick={() => scrollToSection("services")} 
+              <button
+                onClick={() => scrollToSection("services")}
                 className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-services"
               >
                 Services
               </button>
-              <button 
-                onClick={() => scrollToSection("testimonials")} 
+              <button
+                onClick={() => scrollToSection("testimonials")}
                 className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-testimonials"
               >
                 Testimonials
               </button>
-              <button 
-                onClick={() => scrollToSection("contact")} 
+              <button
+                onClick={() => scrollToSection("contact")}
                 className="text-white hover:text-white/80 transition-colors font-medium"
                 data-testid="nav-contact"
               >
                 Contact
               </button>
-              <Button 
-                onClick={() => scrollToSection("contact")} 
+              <Button
+                onClick={() => scrollToSection("contact")}
                 className="bg-white text-[#005a9c] hover:bg-white/90 px-6 py-2 rounded-full font-semibold"
                 data-testid="cta-book-session"
               >
@@ -128,36 +194,36 @@ export default function Home() {
           {isMenuOpen && (
             <div className="md:hidden bg-[#005a9c] border-t border-white/10 py-4">
               <div className="flex flex-col space-y-4">
-                <button 
-                  onClick={() => scrollToSection("home")} 
+                <button
+                  onClick={() => scrollToSection("home")}
                   className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-home"
                 >
                   Home
                 </button>
-                <button 
-                  onClick={() => scrollToSection("about")} 
+                <button
+                  onClick={() => scrollToSection("about")}
                   className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-about"
                 >
                   About
                 </button>
-                <button 
-                  onClick={() => scrollToSection("services")} 
+                <button
+                  onClick={() => scrollToSection("services")}
                   className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-services"
                 >
                   Services
                 </button>
-                <button 
-                  onClick={() => scrollToSection("testimonials")} 
+                <button
+                  onClick={() => scrollToSection("testimonials")}
                   className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-testimonials"
                 >
                   Testimonials
                 </button>
-                <button 
-                  onClick={() => scrollToSection("contact")} 
+                <button
+                  onClick={() => scrollToSection("contact")}
                   className="text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
                   data-testid="mobile-nav-contact"
                 >
@@ -171,7 +237,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-        <div 
+        <div
           className="absolute inset-0 opacity-40"
           style={{
             backgroundImage: `linear-gradient(135deg, #000000 0%, #005a9c 100%), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')`,
@@ -182,13 +248,13 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-4xl mx-auto text-white">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight" data-testid="hero-title">
-              Turn Your 20s into Crores! Earn ₹1 Lakh/Month!
+              {content.hero.title}
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-95 text-blue-100" data-testid="hero-subtitle">
-              Build a high-income LIC career with low investment. Proven system, full mentorship, unlimited earnings!
+              {content.hero.subtitle}
             </p>
-            <Button 
-              onClick={() => scrollToSection("contact")} 
+            <Button
+              onClick={() => scrollToSection("contact")}
               className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg rounded-full font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/20"
               data-testid="hero-cta"
             >
@@ -203,56 +269,78 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-white" data-testid="about-title">
-              Financial Growth with Arivamudham
+              {content.about.title}
             </h2>
             <p className="text-lg text-blue-200/60 max-w-3xl mx-auto" data-testid="about-subtitle">
-              Empowering young entrepreneurs to achieve financial freedom through proven LIC career development
+              {content.about.subtitle}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-start mb-12">
             <div className="space-y-6">
               <h3 className="text-2xl font-semibold mb-4 text-primary" data-testid="about-mission-title">
                 Our Mission
               </h3>
               <p className="text-lg leading-relaxed text-blue-100/70" data-testid="about-description-1">
-                I am Amutha K, a Development Officer at LIC India and the proud founder of Arivamudham - AM's Team. 
-                With over 15 years of experience in the industry, I have had the privilege of training 117 individuals, 
+                I am Amutha K, a Development Officer at LIC India and the proud founder of Arivamudham - AM's Team.
+                With over 15 years of experience in the industry, I have had the privilege of training 117 individuals,
                 creating 23+ success stories, and earning 30+ awards.
               </p>
               <p className="text-lg leading-relaxed text-blue-100/70" data-testid="about-description-2">
-                At Arivamudham - AM's Team, we are dedicated to your success. Our team provides proven training, 
-                mentoring, and support to ensure you reach your goals. Together, we have helped countless individuals 
+                At Arivamudham - AM's Team, we are dedicated to your success. Our team provides proven training,
+                mentoring, and support to ensure you reach your goals. Together, we have helped countless individuals
                 earn ₹1 lakh/month and beyond.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <Card className="text-center p-6 border-blue-900/50 bg-blue-950/10 hover:bg-blue-950/20 transition-all">
-                <CardContent className="p-0">
-                  <div className="text-3xl font-bold text-primary mb-2" data-testid="stat-trained">117+</div>
-                  <div className="text-sm text-blue-300/60" data-testid="stat-trained-label">Individuals Trained</div>
-                </CardContent>
-              </Card>
-              <Card className="text-center p-6 border-blue-900/50 bg-blue-950/10 hover:bg-blue-950/20 transition-all">
-                <CardContent className="p-0">
-                  <div className="text-3xl font-bold text-primary mb-2" data-testid="stat-success">23+</div>
-                  <div className="text-sm text-blue-300/60" data-testid="stat-success-label">Success Stories</div>
-                </CardContent>
-              </Card>
-              <Card className="text-center p-6 border-blue-900/50 bg-blue-950/10 hover:bg-blue-950/20 transition-all">
-                <CardContent className="p-0">
-                  <div className="text-3xl font-bold text-primary mb-2" data-testid="stat-awards">30+</div>
-                  <div className="text-sm text-blue-300/60" data-testid="stat-awards-label">Awards Earned</div>
-                </CardContent>
-              </Card>
-            </div>
+            {/* <div className="flex justify-center md:justify-end">
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-2xl"></div>
+                <img
+                  src="/images/amutha-portrait.png"
+                  alt="Amutha K - Founder of Arivamudham"
+                  className="relative rounded-2xl shadow-2xl shadow-primary/20 w-full max-w-sm object-cover border-4 border-primary/30"
+                  data-testid="founder-portrait"
+                />
+              </div>
+            </div> */}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <Card className="text-center p-6 border-blue-900/50 bg-blue-950/10 hover:bg-blue-950/20 transition-all">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-primary mb-2" data-testid="stat-trained">117+</div>
+                <div className="text-sm text-blue-300/60" data-testid="stat-trained-label">Individuals Trained</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center p-6 border-blue-900/50 bg-blue-950/10 hover:bg-blue-950/20 transition-all">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-primary mb-2" data-testid="stat-success">23+</div>
+                <div className="text-sm text-blue-300/60" data-testid="stat-success-label">Success Stories</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center p-6 border-blue-900/50 bg-blue-950/10 hover:bg-blue-950/20 transition-all">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-primary mb-2" data-testid="stat-awards">30+</div>
+                <div className="text-sm text-blue-300/60" data-testid="stat-awards-label">Awards Earned</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12 text-center">
+            <Button
+              onClick={() => scrollToSection("contact")}
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full font-semibold transition-all hover:scale-105"
+              data-testid="about-cta"
+            >
+              Book your one-to-one session
+            </Button>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-[#020617]">
+      < section id="services" className="py-20 bg-[#020617]" >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-white" data-testid="services-title">
@@ -273,7 +361,7 @@ export default function Home() {
                   Success Mindset Development
                 </h3>
                 <p className="text-blue-100/60" data-testid="service-mindset-description">
-                  Success is 80% mindset and 20% skills. We help you develop the right mindset, set clear goals, 
+                  Success is 80% mindset and 20% skills. We help you develop the right mindset, set clear goals,
                   and create a roadmap to achieve minimum ₹1 crore income.
                 </p>
               </CardContent>
@@ -288,7 +376,7 @@ export default function Home() {
                   Unlimited Income Potential
                 </h3>
                 <p className="text-blue-100/60" data-testid="service-income-description">
-                  No boss, no 9-to-5 job constraints. Enjoy flexible working hours, financial security 
+                  No boss, no 9-to-5 job constraints. Enjoy flexible working hours, financial security
                   with minimum capital investment, and lifetime royalty income.
                 </p>
               </CardContent>
@@ -303,7 +391,7 @@ export default function Home() {
                   Proven Growth Strategy
                 </h3>
                 <p className="text-blue-100/60" data-testid="service-growth-description">
-                  Earn ₹1 lakh per month within 3 years and scale to ₹1 crore per year. Our step-by-step 
+                  Earn ₹1 lakh per month within 3 years and scale to ₹1 crore per year. Our step-by-step
                   roadmap ensures sustainable growth and success.
                 </p>
               </CardContent>
@@ -318,17 +406,27 @@ export default function Home() {
                   Expert Mentorship
                 </h3>
                 <p className="text-blue-100/60" data-testid="service-mentorship-description">
-                  Get comprehensive training, recognition & rewards, and learn to impact people's lives 
+                  Get comprehensive training, recognition & rewards, and learn to impact people's lives
                   while building your own wealth and entrepreneurial success.
                 </p>
               </CardContent>
             </Card>
           </div>
+
+          <div className="mt-12 text-center">
+            <Button
+              onClick={() => scrollToSection("contact")}
+              className="bg-primary hover:bg-primary/90 text-white px-10 py-4 text-lg rounded-full font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105"
+              data-testid="services-cta"
+            >
+              Start Your Success Journey Today
+            </Button>
+          </div>
         </div>
-      </section>
+      </section >
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-black">
+      < section id="testimonials" className="py-20 bg-black" >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-white" data-testid="testimonials-title">
@@ -344,7 +442,7 @@ export default function Home() {
               <CardContent className="p-0">
                 <div className="absolute -top-4 -left-4 text-6xl text-primary/5 font-serif">"</div>
                 <blockquote className="text-lg italic mb-6 relative z-10 text-blue-100/80" data-testid="testimonial-1-text">
-                  "I had zero background in insurance sales. The training system here is designed to take beginners 
+                  "I had zero background in insurance sales. The training system here is designed to take beginners
                   to professionals. Our attitude and willingness to learn matter more than experience."
                 </blockquote>
                 <div className="flex items-center">
@@ -363,7 +461,7 @@ export default function Home() {
               <CardContent className="p-0">
                 <div className="absolute -top-4 -left-4 text-6xl text-primary/5 font-serif">"</div>
                 <blockquote className="text-lg italic mb-6 relative z-10 text-blue-100/80" data-testid="testimonial-2-text">
-                  "I was worried about competition until I learned a proper system here. The system puts me in 
+                  "I was worried about competition until I learned a proper system here. The system puts me in
                   the top 5% who thrive with strategy. Now my friends ask me for financial advice!"
                 </blockquote>
                 <div className="flex items-center">
@@ -378,11 +476,21 @@ export default function Home() {
               </CardContent>
             </Card>
           </div>
+
+          <div className="mt-12 text-center">
+            <Button
+              onClick={() => scrollToSection("contact")}
+              className="bg-primary hover:bg-primary/90 text-white px-10 py-4 text-lg rounded-full font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105"
+              data-testid="testimonials-cta"
+            >
+              Join Our Success Stories
+            </Button>
+          </div>
         </div>
-      </section>
+      </section >
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-[#020617] text-white">
+      < section id="contact" className="py-20 bg-[#020617] text-white" >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-white" data-testid="contact-title">
@@ -396,15 +504,15 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="space-y-8">
               <h3 className="text-2xl font-semibold mb-8 text-primary" data-testid="contact-info-title">Contact Information</h3>
-              
+
               <div className="flex items-center space-x-4 p-4 bg-black/40 rounded-lg border border-blue-900/10 hover:border-primary/20 transition-colors">
                 <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/20">
                   <Phone className="h-6 w-6 text-white" />
                 </div>
                 <div>
                   <div className="font-semibold mb-1 text-white">Phone:</div>
-                  <a 
-                    href="tel:+919942815544" 
+                  <a
+                    href="tel:+919942815544"
                     className="text-blue-100/70 hover:text-primary transition-colors"
                     data-testid="contact-phone"
                   >
@@ -419,8 +527,8 @@ export default function Home() {
                 </div>
                 <div>
                   <div className="font-semibold mb-1 text-white">Email:</div>
-                  <a 
-                    href="mailto:amutha.licdocbe@gmail.com" 
+                  <a
+                    href="mailto:amutha.licdocbe@gmail.com"
                     className="text-blue-100/70 hover:text-primary transition-colors"
                     data-testid="contact-email"
                   >
@@ -491,6 +599,19 @@ export default function Home() {
                   </div>
 
                   <div>
+                    <Label htmlFor="location" className="text-blue-100/80 mb-2 block">
+                      Location
+                    </Label>
+                    <Input
+                      id="location"
+                      name="location"
+                      type="text"
+                      className="bg-black/50 border-blue-900/20 text-white focus:border-primary/50 focus:ring-primary/20 transition-all"
+                      data-testid="input-location"
+                    />
+                  </div>
+
+                  <div>
                     <Label htmlFor="message" className="text-blue-100/80 mb-2 block">
                       Message
                     </Label>
@@ -516,16 +637,16 @@ export default function Home() {
             </Card>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Footer */}
-      <footer className="bg-black py-8 text-white border-t border-blue-900/20">
+      < footer className="bg-black py-8 text-white border-t border-blue-900/20" >
         <div className="container mx-auto px-4 text-center">
           <p className="text-blue-300/40" data-testid="footer-copyright">
             &copy; <span data-testid="footer-year">{currentYear}</span> Arivamudham Business Solutions. All rights reserved.
           </p>
         </div>
-      </footer>
-    </div>
+      </footer >
+    </div >
   );
 }

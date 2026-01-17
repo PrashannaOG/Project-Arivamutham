@@ -9,10 +9,40 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
 });
 
+export const contacts = pgTable("contacts", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  message: text("message").notNull(),
+});
+
+export const siteContent = pgTable("site_content", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  section: text("section").notNull().unique(),
+  content: text("content").notNull(), // JSON string or plain text
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
 });
 
+export const insertContactSchema = createInsertSchema(contacts).pick({
+  name: true,
+  email: true,
+  phone: true,
+  message: true,
+});
+
+export const insertContentSchema = createInsertSchema(siteContent).pick({
+  section: true,
+  content: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
+export type Contact = typeof contacts.$inferSelect;
+export type InsertContact = z.infer<typeof insertContactSchema>;
+export type SiteContent = typeof siteContent.$inferSelect;
+export type InsertContent = z.infer<typeof insertContentSchema>;
