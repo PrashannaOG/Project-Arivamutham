@@ -20,7 +20,7 @@ export default function Home() {
       subtitle: "Build a high-income LIC career with low investment. Proven system, full mentorship, unlimited earnings!"
     },
     about: {
-      title: "Financial Growth with Arivamudham",
+      title: "Financial Growth with Arivamutham",
       subtitle: "Empowering young entrepreneurs to achieve financial freedom through proven LIC career development"
     }
   });
@@ -131,7 +131,7 @@ export default function Home() {
               className="text-2xl font-bold text-white hover:text-white/80 transition-colors"
               data-testid="logo-button"
             >
-              Arivamudham
+              Arivamutham
             </button>
 
             {/* Desktop Navigation */}
