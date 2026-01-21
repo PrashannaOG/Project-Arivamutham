@@ -282,12 +282,12 @@ export default function Home() {
                 Our Mission
               </h3>
               <p className="text-lg leading-relaxed text-blue-100/70" data-testid="about-description-1">
-                I am Amutha K, a Development Officer at LIC India and the proud founder of Arivamudham - AM's Team.
+                I am Amutha K, a Development Officer at LIC India and the proud founder of Arivamutham - AM's Team.
                 With over 15 years of experience in the industry, I have had the privilege of training 117 individuals,
                 creating 23+ success stories, and earning 30+ awards.
               </p>
               <p className="text-lg leading-relaxed text-blue-100/70" data-testid="about-description-2">
-                At Arivamudham - AM's Team, we are dedicated to your success. Our team provides proven training,
+                At Arivamutham - AM's Team, we are dedicated to your success. Our team provides proven training,
                 mentoring, and support to ensure you reach your goals. Together, we have helped countless individuals
                 earn ₹1 lakh/month and beyond.
               </p>
@@ -298,7 +298,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-2xl"></div>
                 <img
                   src="/images/amutha-portrait.png"
-                  alt="Amutha K - Founder of Arivamudham"
+                  alt="Amutha K - Founder of Arivamutham"
                   className="relative rounded-2xl shadow-2xl shadow-primary/20 w-full max-w-sm object-cover border-4 border-primary/30"
                   data-testid="founder-portrait"
                 />
@@ -643,7 +643,7 @@ export default function Home() {
       < footer className="bg-black py-8 text-white border-t border-blue-900/20" >
         <div className="container mx-auto px-4 text-center">
           <p className="text-blue-300/40" data-testid="footer-copyright">
-            &copy; <span data-testid="footer-year">{currentYear}</span> Arivamudham Business Solutions. All rights reserved.
+            &copy; <span data-testid="footer-year">{currentYear}</span> Arivamutham Business Solutions. All rights reserved.
           </p>
         </div>
       </footer >
