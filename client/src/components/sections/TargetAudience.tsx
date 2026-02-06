@@ -7,13 +7,13 @@ interface TargetAudienceProps {
 
 export function TargetAudience({ onRegister }: TargetAudienceProps) {
   return (
-    <section className="py-20 bg-primary text-primary-foreground relative overflow-hidden">
+    <section id="target-audience" className="py-20 bg-primary text-primary-foreground relative overflow-hidden">
       {/* Abstract Background Shapes */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl"></div>
 
       <div className="container px-4 md:px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
           <div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-6">
               Is This Career Right for You?
@@ -21,13 +21,13 @@ export function TargetAudience({ onRegister }: TargetAudienceProps) {
             <p className="text-xl text-blue-100 mb-8">
               We are looking for ambitious individuals who are ready to take control of their financial destiny.
             </p>
-            <Button 
-                onClick={onRegister}
-                variant="secondary"
-                size="lg" 
-                className="bg-secondary hover:bg-secondary/90 text-white font-bold text-lg h-14 px-8"
-              >
-                See If You Qualify
+            <Button
+              onClick={onRegister}
+              variant="secondary"
+              size="lg"
+              className="bg-secondary hover:bg-secondary/90 text-white font-bold text-lg h-14 px-8"
+            >
+              See If You Qualify
             </Button>
           </div>
 

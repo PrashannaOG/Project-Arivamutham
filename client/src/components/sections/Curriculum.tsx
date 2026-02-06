@@ -8,18 +8,18 @@ interface CurriculumProps {
 
 export function Curriculum({ onRegister }: CurriculumProps) {
   return (
-    <section className="py-20 bg-white">
+    <section id="curriculum" className="py-20 bg-white">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary">
-            What Will You Learn in the 121 Session?
+            What Will You Learn in the one-to-one Session?
           </h2>
           <p className="mt-4 text-xl text-muted-foreground">
             Walk away with a clear roadmap to success!
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
           <div className="grid gap-8">
             {[
               { icon: Zap, title: "The Power of Starting Young", desc: "Learn how beginning early gives you an unfair financial advantage." },
@@ -39,15 +39,15 @@ export function Curriculum({ onRegister }: CurriculumProps) {
                 </div>
               </div>
             ))}
-            
+
             <div className="pt-4">
-                <Button 
-                    onClick={onRegister}
-                    size="lg" 
-                    className="bg-secondary hover:bg-secondary/90 text-white font-bold text-lg"
-                >
-                    Get Access to This Exclusive Training
-                </Button>
+              <Button
+                onClick={onRegister}
+                size="lg"
+                className="bg-secondary hover:bg-secondary/90 text-white font-bold text-lg"
+              >
+                Get Access to This Exclusive Training
+              </Button>
             </div>
           </div>
 

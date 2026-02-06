@@ -17,7 +17,7 @@ interface TestimonialsProps {
 
 export function Testimonials({ onRegister }: TestimonialsProps) {
   return (
-    <section className="py-20 bg-slate-50">
+    <section id="testimonials" className="py-20 bg-slate-50">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary">
@@ -72,11 +72,11 @@ export function Testimonials({ onRegister }: TestimonialsProps) {
           </Carousel>
 
           <div className="text-center mt-12">
-            <Button 
-                onClick={onRegister}
-                className="bg-destructive hover:bg-destructive/90 text-white font-bold text-lg h-12 px-8"
+            <Button
+              onClick={onRegister}
+              className="bg-destructive hover:bg-destructive/90 text-white font-bold text-lg h-12 px-8"
             >
-                Be Our Next Success Story
+              Be Our Next Success Story
             </Button>
           </div>
         </div>

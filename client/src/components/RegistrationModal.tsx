@@ -7,6 +7,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -32,14 +34,30 @@ export function RegistrationModal({ open, onOpenChange }: RegistrationModalProps
     },
   });
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (values: z.infer<typeof formSchema>) => {
+      const res = await apiRequest("POST", "/api/register", values);
+      return await res.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Registration Successful!",
+        description: "We'll contact you shortly to schedule your one-to-one session.",
+      });
+      onOpenChange(false);
+      form.reset();
+    },
+    onError: (error) => {
+      toast({
+        title: "Registration Failed",
+        description: error.message || "Please try again later",
+        variant: "destructive",
+      });
+    },
+  });
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // In a real app, this would send data to backend
-    console.log(values);
-    toast({
-      title: "Registration Successful!",
-      description: "We'll contact you shortly to schedule your 121 session.",
-    });
-    onOpenChange(false);
+    mutate(values);
   }
 
   return (
@@ -48,7 +66,7 @@ export function RegistrationModal({ open, onOpenChange }: RegistrationModalProps
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-primary">Book Your Strategy Session</DialogTitle>
           <DialogDescription>
-            Enter your details below to secure your spot for the free 121 career strategy session.
+            Enter your details below to secure your spot for the free one-to-one career strategy session.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -105,8 +123,8 @@ export function RegistrationModal({ open, onOpenChange }: RegistrationModalProps
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold text-lg h-12">
-              Confirm My Spot
+            <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold text-lg h-12" disabled={isPending}>
+              {isPending ? "Confirming..." : "Confirm My Spot"}
             </Button>
           </form>
         </Form>

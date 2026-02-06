@@ -10,10 +10,13 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   /* Brand Colors */
-  --color-brand-blue: hsl(217 100% 29%); /* #004AAD */
-  --color-brand-orange: hsl(36 90% 55%); /* #F4A024 */
-  --color-brand-red: hsl(2 76% 47%); /* #D91E18 */
-  
+  --color-brand-blue: hsl(220 90% 50%);
+  /* Electric Blue */
+  --color-brand-orange: hsl(36 100% 50%);
+  /* Vibrant Gold */
+  --color-brand-red: hsl(0 90% 60%);
+  /* Bright Red */
+
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));
@@ -33,7 +36,7 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  
+
   --font-sans: 'Lato', sans-serif;
   --font-heading: 'Montserrat', sans-serif;
 }
@@ -41,33 +44,37 @@
 /* LIGHT MODE */
 :root {
   --background: 0 0% 100%;
-  --foreground: 217 100% 15%; /* Deep blue-black for text */
-  
+  --foreground: 222 47% 11%;
+  /* Rich Deep Blue-Black */
+
   --card: 0 0% 100%;
-  --card-foreground: 217 100% 15%;
-  
+  --card-foreground: 222 47% 11%;
+
   --popover: 0 0% 100%;
-  --popover-foreground: 217 100% 15%;
-  
-  --primary: 217 100% 29%; /* Brand Blue */
+  --popover-foreground: 222 47% 11%;
+
+  --primary: 220 90% 50%;
+  /* Electric Blue */
   --primary-foreground: 0 0% 100%;
-  
-  --secondary: 36 90% 55%; /* Brand Orange */
+
+  --secondary: 36 100% 50%;
+  /* Vibrant Gold/Orange */
   --secondary-foreground: 0 0% 100%;
-  
+
   --muted: 210 40% 96.1%;
   --muted-foreground: 215.4 16.3% 46.9%;
-  
+
   --accent: 210 40% 96.1%;
-  --accent-foreground: 217 100% 29%;
-  
-  --destructive: 2 76% 47%; /* Brand Red */
+  --accent-foreground: 220 90% 50%;
+
+  --destructive: 0 90% 60%;
+  /* Bright Red */
   --destructive-foreground: 0 0% 100%;
 
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --ring: 217 100% 29%;
-  
+  --ring: 220 90% 50%;
+
   --radius: 0.5rem;
 }
 
@@ -75,10 +82,17 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading font-bold;
   }
 }

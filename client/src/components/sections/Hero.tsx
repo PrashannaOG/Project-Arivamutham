@@ -8,10 +8,10 @@ interface HeroProps {
 
 export function Hero({ onRegister }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-blue-100 py-20 lg:py-32">
-      <div className="container px-4 md:px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
-          <motion.div 
+    <section id="home" className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-blue-100 py-20 lg:py-32">
+      <div className="container px-4 md:px-6 mx-auto">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center max-w-7xl mx-auto">
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -29,16 +29,16 @@ export function Hero({ onRegister }: HeroProps) {
               </p>
             </div>
             <div className="flex flex-col gap-4 min-[400px]:flex-row">
-              <Button 
+              <Button
                 onClick={onRegister}
-                size="lg" 
+                size="lg"
                 className="bg-secondary hover:bg-secondary/90 text-white font-bold text-lg px-8 py-6 rounded-full shadow-lg shadow-orange-500/20 transform hover:-translate-y-1 transition-all"
               >
                 Book Your FREE Strategy Session
               </Button>
             </div>
           </motion.div>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}

@@ -12,8 +12,8 @@ interface FAQProps {
 
 export function FAQ({ onRegister }: FAQProps) {
   return (
-    <section className="py-20 bg-white">
-      <div className="container px-4 md:px-6 max-w-4xl">
+    <section id="faq" className="py-20 bg-white">
+      <div className="container px-4 md:px-6 max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
             Still Unsure? Let’s Bust Some Myths!
@@ -48,14 +48,14 @@ export function FAQ({ onRegister }: FAQProps) {
         </Accordion>
 
         <div className="text-center">
-            <Button 
-                onClick={onRegister}
-                variant="outline"
-                size="lg" 
-                className="border-primary text-primary hover:bg-primary hover:text-white font-bold text-lg h-12 px-8"
-            >
-                Get Your Doubts Cleared – Book Now!
-            </Button>
+          <Button
+            onClick={onRegister}
+            variant="outline"
+            size="lg"
+            className="border-primary text-primary hover:bg-primary hover:text-white font-bold text-lg h-12 px-8"
+          >
+            Get Your Doubts Cleared – Book Now!
+          </Button>
         </div>
       </div>
     </section>

@@ -8,6 +8,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { RegistrationModal } from "@/components/RegistrationModal";
+import { Header } from "@/components/Header";
 
 export default function LandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +16,8 @@ export default function LandingPage() {
   const openModal = () => setIsModalOpen(true);
 
   return (
-    <main className="min-h-screen font-sans text-foreground bg-background">
+    <main className="min-h-screen font-sans text-foreground bg-background scroll-smooth">
+      <Header />
       <Hero onRegister={openModal} />
       <WhyJoin />
       <Earnings onRegister={openModal} />
@@ -24,9 +26,9 @@ export default function LandingPage() {
       <Testimonials onRegister={openModal} />
       <FAQ onRegister={openModal} />
       <FinalCTA onRegister={openModal} />
-      
+
       <RegistrationModal open={isModalOpen} onOpenChange={setIsModalOpen} />
-      
+
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-8 text-center text-sm">
         <div className="container">

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function WhyJoin() {
   return (
-    <section className="py-20 bg-white">
+    <section id="why-join" className="py-20 bg-white">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary">
@@ -16,13 +16,13 @@ export function WhyJoin() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <motion.div 
+          <motion.div
             whileHover={{ y: -5 }}
             className="h-full"
           >
             <Card className="bg-red-50 border-red-100 h-full">
               <CardHeader>
-                <CardTitle className="text-destructive flex items-center gap-2 text-2xl">
+                <CardTitle className="text-destructive flex items-center justify-center gap-2 text-2xl">
                   <X className="h-8 w-8" /> The Old Way
                 </CardTitle>
               </CardHeader>
@@ -37,13 +37,13 @@ export function WhyJoin() {
             </Card>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             whileHover={{ y: -5 }}
             className="h-full"
           >
             <Card className="bg-blue-50 border-blue-100 h-full shadow-lg">
               <CardHeader>
-                <CardTitle className="text-primary flex items-center gap-2 text-2xl">
+                <CardTitle className="text-primary flex items-center justify-center gap-2 text-2xl">
                   <Check className="h-8 w-8" /> The LIC Way
                 </CardTitle>
               </CardHeader>
