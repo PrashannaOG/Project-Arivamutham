@@ -14,7 +14,7 @@ export async function sendEmailNotification(to: string, name: string) {
 
     try {
         const data = await resend.emails.send({
-            from: "Acme <onboarding@resend.dev>",
+            from: "LIC Career Advisor <info@arivamutham.com>",
             to: [to],
             subject: "Registration Successful - LIC Career Advisor Program",
             text: `Hello ${name},\n\nThank you for registering for the one-to-one career strategy session. We will contact you shortly to schedule your session.\n\nBest regards,\nThe Team`,
@@ -40,7 +40,7 @@ export async function sendAdminEmailNotification(registrationDetails: any) {
 
     try {
         const data = await resend.emails.send({
-            from: "Acme <onboarding@resend.dev>",
+            from: "LIC Career Advisor <info@arivamutham.com>",
             to: [adminEmail],
             subject: "New Registration Alert",
             text: `New registration details:\n\nName: ${registrationDetails.name}\nEmail: ${registrationDetails.email}\nPhone: ${registrationDetails.phone}\nCity: ${registrationDetails.city}`,
