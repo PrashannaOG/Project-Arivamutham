@@ -12,23 +12,57 @@ export function Hero({ onRegister }: HeroProps) {
       <div className="container px-4 md:px-6 mx-auto">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0, x: -50 },
+              visible: {
+                opacity: 1,
+                x: 0,
+                transition: {
+                  duration: 0.6,
+                  staggerChildren: 0.2
+                }
+              }
+            }}
             className="flex flex-col justify-center space-y-8"
           >
             <div className="space-y-4">
-              <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl xl:text-6xl/none text-primary">
+              <motion.h1
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="text-4xl font-extrabold tracking-tighter sm:text-5xl xl:text-6xl/none text-primary"
+              >
                 Turn Your 20s into <span className="text-secondary">Crores!</span>
-              </h1>
-              <p className="max-w-[600px] text-gray-700 md:text-xl font-medium">
+              </motion.h1>
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="max-w-[600px] text-gray-700 md:text-xl font-medium"
+              >
                 Discover a Proven, Zero-Investment Career Path to <span className="text-primary font-bold">₹1 Lakh/Month</span> & Financial Freedom!
-              </p>
-              <p className="text-muted-foreground text-lg">
+              </motion.p>
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="text-muted-foreground text-lg"
+              >
                 Join the LIC Career Advisor program. Full mentorship, unlimited earnings.
-              </p>
+              </motion.p>
             </div>
-            <div className="flex flex-col gap-4 min-[400px]:flex-row">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1 }
+              }}
+              className="flex flex-col gap-4 min-[400px]:flex-row"
+            >
               <Button
                 onClick={onRegister}
                 size="lg"
@@ -36,7 +70,7 @@ export function Hero({ onRegister }: HeroProps) {
               >
                 Book Your FREE Strategy Session
               </Button>
-            </div>
+            </motion.div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}

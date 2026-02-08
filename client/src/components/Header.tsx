@@ -59,8 +59,8 @@ export function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? "bg-white/80 backdrop-blur-lg shadow-md"
-                    : "bg-transparent"
+                ? "bg-white/80 backdrop-blur-lg shadow-md"
+                : "bg-transparent"
                 }`}
         >
             <div className="container mx-auto px-4 md:px-6">
@@ -84,7 +84,7 @@ export function Header() {
                     </motion.div>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center space-x-1">
+                    <nav className="hidden lg:flex items-center space-x-2">
                         {navLinks.map((link) => (
                             <a
                                 key={link.href}
@@ -93,12 +93,20 @@ export function Header() {
                                     e.preventDefault();
                                     scrollToSection(link.href);
                                 }}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeSection === link.href.substring(1)
-                                        ? "bg-secondary text-white"
-                                        : "text-gray-700 hover:bg-gray-100"
+                                className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeSection === link.href.substring(1)
+                                        ? "text-secondary"
+                                        : "text-gray-700 hover:text-primary"
                                     }`}
                             >
                                 {link.name}
+                                {activeSection === link.href.substring(1) && (
+                                    <motion.div
+                                        layoutId="activeSection"
+                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary mx-3"
+                                        initial={false}
+                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                    />
+                                )}
                             </a>
                         ))}
                     </nav>
@@ -138,8 +146,8 @@ export function Header() {
                                         scrollToSection(link.href);
                                     }}
                                     className={`px-4 py-3 rounded-lg text-base font-medium transition-all ${activeSection === link.href.substring(1)
-                                            ? "bg-secondary text-white"
-                                            : "text-gray-700 hover:bg-gray-100"
+                                        ? "bg-secondary text-white"
+                                        : "text-gray-700 hover:bg-gray-100"
                                         }`}
                                 >
                                     {link.name}
