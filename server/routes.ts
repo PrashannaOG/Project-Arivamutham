@@ -32,6 +32,27 @@ export async function registerRoutes(
     }
   });
 
+  // DEBUG ENDPOINT: Test email functionality directly
+  app.get("/api/test-email", async (_req, res) => {
+    try {
+      console.log("Triggering manual test email...");
+      await sendAdminEmailNotification({
+        name: "TEST USER",
+        email: "test@example.com",
+        phone: "1234567890",
+        city: "Test City"
+      });
+      res.json({ message: "Test email executed. Check your inbox! If empty, check server logs." });
+    } catch (error: any) {
+      console.error("Test email failed:", error);
+      res.status(500).json({
+        message: "Email Failed",
+        error: error.message,
+        stack: error.stack
+      });
+    }
+  });
+
   return httpServer;
 }
 
