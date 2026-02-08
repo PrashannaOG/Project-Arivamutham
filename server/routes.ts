@@ -36,13 +36,19 @@ export async function registerRoutes(
   app.get("/api/test-email", async (_req, res) => {
     try {
       console.log("Triggering manual test email...");
-      await sendAdminEmailNotification({
+      // info will now contain the SMTP response
+      const info = await sendAdminEmailNotification({
         name: "TEST USER",
         email: "test@example.com",
         phone: "1234567890",
         city: "Test City"
       });
-      res.json({ message: "Test email executed. Check your inbox! If empty, check server logs." });
+
+      res.json({
+        message: "Email Attempt Finished",
+        status: "success",
+        smtp_response: info
+      });
     } catch (error: any) {
       console.error("Test email failed:", error);
       res.status(500).json({

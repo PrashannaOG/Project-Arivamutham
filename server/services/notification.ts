@@ -46,7 +46,7 @@ export async function sendAdminEmailNotification(registrationDetails: any) {
 
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
         console.error("CRITICAL: Email credentials missing, skipping admin email notification");
-        return;
+        throw new Error("Email credentials missing");
     }
 
     const mailOptions = {
@@ -56,12 +56,6 @@ export async function sendAdminEmailNotification(registrationDetails: any) {
         text: `New registration details:\n\nName: ${registrationDetails.name}\nEmail: ${registrationDetails.email}\nPhone: ${registrationDetails.phone}\nCity: ${registrationDetails.city}`,
     };
 
-    try {
-        const info = await transporter.sendMail(mailOptions);
-        console.log("Admin notification email sent successfully.");
-        console.log("Message ID:", info.messageId);
-    } catch (error) {
-        console.error("FAILED to send ADMIN email:");
-        console.error(error);
-    }
+    // Return the promise directly so the caller can await it and get the info object
+    return await transporter.sendMail(mailOptions);
 }
