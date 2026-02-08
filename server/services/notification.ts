@@ -3,15 +3,15 @@ import nodemailer from "nodemailer";
 // Email Service
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // Use TLS
-    requireTLS: true,
+    port: 465,
+    secure: true, // Use SSL
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
-    logger: true, // Log to console
-    debug: true   // Include debug info
+    connectionTimeout: 10000, // 10 seconds
+    greetingTimeout: 10000,
+    socketTimeout: 10000
 });
 
 export async function sendEmailNotification(to: string, name: string) {
