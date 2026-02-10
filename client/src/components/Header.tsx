@@ -79,7 +79,7 @@ export function Header() {
                             }}
                             className="text-2xl font-bold text-primary hover:text-secondary transition-colors"
                         >
-                            LIC Career Advisory
+                            Arivamutham
                         </a>
                     </motion.div>
 
