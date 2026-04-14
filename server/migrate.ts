@@ -1,4 +1,5 @@
 import { migrate } from "drizzle-orm/node-postgres/migrator";
+// Triggering clean redeploy after DB clear
 import { db, pool } from "./db";
 
 async function runMigration() {
