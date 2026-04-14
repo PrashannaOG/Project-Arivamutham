@@ -20,6 +20,7 @@ export async function registerRoutes(
       // Send notifications asynchronously (don't block response)
       sendEmailNotification(registration.email, registration.name);
       sendAdminEmailNotification(registration);
+      sendAdminWhatsAppNotification(registration);
 
       res.status(201).json(registration);
     } catch (error) {
@@ -65,3 +66,4 @@ export async function registerRoutes(
 import { insertRegistrationSchema } from "@shared/schema";
 import { ZodError } from "zod";
 import { sendEmailNotification, sendAdminEmailNotification } from "./services/notification";
+import { sendAdminWhatsAppNotification } from "./services/whatsapp";
