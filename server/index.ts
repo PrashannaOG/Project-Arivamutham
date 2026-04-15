@@ -2,6 +2,10 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
+import { db, pool } from "./db";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 const httpServer = createServer(app);
@@ -59,7 +63,34 @@ app.use((req, res, next) => {
   next();
 });
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 (async () => {
+  // Run migrations on startup
+  if (process.env.NODE_ENV === "production") {
+    log("Running production migrations...");
+    try {
+      const migrationsPath = path.resolve(__dirname, "migrations");
+      await migrate(db, { migrationsFolder: migrationsPath });
+      log("Migrations completed successfully");
+    } catch (error: any) {
+      if (error.message?.includes("already exists")) {
+        log("Table conflict detected. Force clearing database and retrying...");
+        const client = await pool.connect();
+        await client.query('DROP TABLE IF EXISTS registrations, users, __drizzle_migrations, drizzle_migrations CASCADE');
+        client.release();
+        const migrationsPath = path.resolve(__dirname, "migrations");
+        await migrate(db, { migrationsFolder: migrationsPath });
+        log("Migrations completed after force clear");
+      } else {
+        log(`Migration failed: ${error.message}`);
+        // In some environments, we might want to continue anyway if migrations exist
+      }
+    }
+  }
+
   await registerRoutes(httpServer, app);
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
