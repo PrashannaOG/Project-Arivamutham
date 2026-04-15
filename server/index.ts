@@ -5,7 +5,6 @@ import { createServer } from "http";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { db, pool } from "./db";
 import path from "path";
-import { fileURLToPath } from "url";
 
 const app = express();
 const httpServer = createServer(app);
@@ -64,8 +63,6 @@ app.use((req, res, next) => {
 });
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 (async () => {
   // Run migrations on startup
