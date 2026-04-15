@@ -69,7 +69,7 @@ app.use((req, res, next) => {
   if (process.env.NODE_ENV === "production") {
     log("Running production migrations...");
     try {
-      const migrationsPath = path.resolve(__dirname, "migrations");
+      const migrationsPath = path.resolve(process.cwd(), "dist", "migrations");
       await migrate(db, { migrationsFolder: migrationsPath });
       log("Migrations completed successfully");
     } catch (error: any) {
@@ -78,7 +78,7 @@ app.use((req, res, next) => {
         const client = await pool.connect();
         await client.query('DROP TABLE IF EXISTS registrations, users, __drizzle_migrations, drizzle_migrations CASCADE');
         client.release();
-        const migrationsPath = path.resolve(__dirname, "migrations");
+        const migrationsPath = path.resolve(process.cwd(), "dist", "migrations");
         await migrate(db, { migrationsFolder: migrationsPath });
         log("Migrations completed after force clear");
       } else {
