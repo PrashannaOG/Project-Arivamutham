@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 
+// Triggering new deployment on confirmed clean DB
 // Email Service with Resend
 // Note: RESEND_API_KEY must be set in environment variables
 const resend = new Resend(process.env.RESEND_API_KEY);
